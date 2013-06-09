@@ -6,4 +6,4 @@ I'll improve it some time later.
 U can see it at [my site](http://biaobiaoqi.me/Love)
 ###What I've done
 * 1.Add background music
-* ~2.Add full screen mode~
+* ~~2.Add full screen mode~~
