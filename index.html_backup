@@ -10,9 +10,9 @@
 		}
 	</style>
 	
-   	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
-    <link rel="stylesheet" href="css/style.css" type="text/css"/>
-	<link rel="stylesheet" href="css/default.css" type="text/css" >
+   	<link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+	<link href="css/default.css" type="text/css" rel="stylesheet">
 
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/garden.js"></script>
@@ -23,8 +23,8 @@
 </head>
 
 <body>
-	<div class="centered" id="loading"> <h1>正在加载...</h1></div>
-	<button id="start_btn" class="btn btn-primary btn-large centered" style="text-align:center;" >START</button>
+	<div id="loading">正在加载...</div>
+	<button id="start_btn" class="btn btn-primary btn-large centered">START</button>
 
 	<div id="mainDiv">
 		<div id="content">
@@ -42,9 +42,9 @@
 				<span class="comments">// 3 years in middle school, I admired you a lot, unrequited.</span><br />
 				relationship(u, i) != <span class="keyword">true</span><br />
 				<span class="comments">// In high school, we were seperating by distance.</span><br />
-				distance(u, i) >= 400km || distance(u, i) >= 40km<br />
+				distance(u, i) >= distance we can not see each other <br />
 				<span class="comments">// I was always waiting for you.</span><br />
-				i in <span class="keyword">loop</span> {<br />
+				i in a <span class="keyword">loop</span> {<br />
 				<span class="placeholder"/>	waiting()<br />
 				} <br />
 				<br />
@@ -52,7 +52,7 @@
 				<span class="comments">// After you finished college entrance examination,</span><br />
 				<span class="comments">// mobile phone connected us together again.</span><br />
 				love(u, i) = <span class="keyword">true</span> && relationship(u, i) = <span class="keyword">true</span><br />
-				<span class="comments">// Sometimes, distance and time brought us to quarrels.</span><br />
+				<span class="comments">// Sometimes, distance and time bring us to quarrels.</span><br />
 				<span class="comments">// That doesn't matter, we can understand each other.</span><br />
 				happiness(u, i) || quarrels(u, i)  ==> understanding(u, i)<br/>
 				<span class="comments">// Distance and time can not stop lovers.</span><br />
@@ -82,15 +82,18 @@
 		</div>
 	</div>
 	
+	
+
+	<!-- hide text at start-->
+	<script type="text/javascript"><!-- 
+
+	</script> 
+
+
+
 	<script type="text/javascript">
 		var MUSIC;
-		var start_btn = document.getElementById('start_btn');
-		var loading_hint = document.getElementById('loading');
-		var code = document.getElementById("code"); 
-		
-		//hide code and start_btn
-		code.style.display ="none"; 
-		start_btn.style.display = "none";
+
 
 		soundManager.setup({
 		        url: 'music/',
@@ -98,15 +101,64 @@
 	    });
 
 		function initMP3() {
+
 	        MUSIC = soundManager.createSound({
 	            id: 'bgmusic',
 	           	url: 'music/xiaojiuwo.mp3',
 		        onload: function() {
 		            setTimeout(function() {
-		            	//background music loading completed
-						loading_hint.style.display = "none";
-						start_btn.style.display = "";
+                        var loading = document.getElementById('loading');
+						loading.style.cursor = 'pointer';
+		                loading.innerHTML = '点击开始';
+				        loading.onclick = function() {
 
+
+		        				//show code
+        	var id = document.getElementById("code"); 
+			id.style.display =""; 
+
+			//full screen
+			//screenfull && screenfull.request();
+
+            //hide button
+            document.getElementById("start_btn").remove();
+
+			//start animation
+
+			var together = new Date();
+			together.setFullYear(2009, 6, 12);
+			together.setHours(22);
+			together.setMinutes(0);
+			together.setSeconds(0);
+			together.setMilliseconds(0);
+			
+			if (!document.createElement('canvas').getContext) {
+				var msg = document.createElement("div");
+				msg.id = "errorMsg";
+				msg.innerHTML = "Your browser doesn't support HTML5!<br/>Recommend use Chrome 14+/IE 9+/Firefox 7+/Safari 4+"; 
+				document.body.appendChild(msg);
+				$("#code").css("display", "none")
+				$("#copyright").css("position", "absolute");
+				$("#copyright").css("bottom", "10px");
+			    document.execCommand("stop");
+			} else {
+
+				startHeartAnimation();
+
+				setTimeout(function () {
+					startHeartAnimation();
+				}, 5000);
+
+				timeElapse(together);
+				setInterval(function () {
+					timeElapse(together);
+				}, 500);
+
+				adjustCodePosition();
+				$("#code").typewriter();
+			}
+		                	
+		       	        }
 		            }, 3000);
 		        }
 	        });
@@ -114,6 +166,10 @@
 	    }
 
 
+		var id = document.getElementById("code"); 
+		id.style.display ="none"; 
+
+		// Why can not put these code into a function
 		var offsetX = $("#loveHeart").width() / 2;
 		var offsetY = $("#loveHeart").height() / 2 - 55;
 
@@ -126,7 +182,7 @@
 			id.style.display =""; 
 
 			//full screen
-			screenfull && screenfull.request();
+			//screenfull && screenfull.request();
 
             //hide button
             document.getElementById("start_btn").remove();
