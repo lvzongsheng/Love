@@ -17,9 +17,9 @@
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/garden.js"></script>
 	<script type="text/javascript" src="js/screenfull.min.js"></script>
+	<script type="text/javascript" src="js/jquery.fullscreen.js"></script>
     <script type="text/javascript" src="js/functions.js"></script>
 	<script type="text/javascript" src="js/soundmanager2-nodebug-jsmin.js"></script>
-
 </head>
 
 <body>
@@ -31,54 +31,55 @@
 			<div id="code">
 				<span class="comments">/**</span><br />
 				<span class="space"/><span class="comments">* Dear, as you are not so familiar with coding, </span><br />
-				<span class="space"/><span class="comments">* I write in pesudo-code to celebrate our 4st anniversary,</span><br />
+				<span class="space"/><span class="comments">* I write in pesudo-code to celebrate our 1st anniversary,</span><br />
 				<span class="space"/><span class="comments">* as well as your graduation. </span><br/>
 				<span class="space"/><span class="comments">*/</span><br />
-				Boy i = <span class="string">"biaobiaoqi"</span><br />
-				Girl u = <span class="string">"600"</span><br />
+				Boy i = <span class="string">"lvzongsheng"</span><br />
+				Girl u = <span class="string">"yangyang"</span><br />
 				<br />
-				<span class="comments">// We first met with each other in 2002. </span><br />
+				<span class="comments">// We first met with each other in 2006. </span><br />
 				met(u, i)<br />
-				<span class="comments">// 3 years in middle school, I admired you a lot, unrequited.</span><br />
+				<span class="comments">// 2 years in middle school, I admired you a lot, unrequited.</span><br />
+				<span class="comments">// The most happiness is answering all your questions. </sapn><br /> 
+				<span class="comments">// Slowly, I know you are the apple of my eyes. But....</span><br />
 				relationship(u, i) != <span class="keyword">true</span><br />
-				<span class="comments">// In high school, we were seperating by distance.</span><br />
-				distance(u, i) >= 400km || distance(u, i) >= 40km<br />
-				<span class="comments">// I was always waiting for you.</span><br />
+				<span class="comments">// In high school, we were seperating by distance. </span><br />
+				distance(u, i) >= 150km<br />
+				<span class="comments">// We has met wrong one but still you are my Miss Right.</span><br /> 
+				<span class="comments">// In my mind, you are the strong, nice and sweety girl.</span><br />
 				i in <span class="keyword">loop</span> {<br />
 				<span class="placeholder"/>	waiting()<br />
 				} <br />
 				<br />
-				<span class="comments">// Jun 12, 2009 </span><br />
-				<span class="comments">// After you finished college entrance examination,</span><br />
-				<span class="comments">// mobile phone connected us together again.</span><br />
+				<span class="comments">// Jan 18, 2013 </span><br />
+				<span class="comments">// We are together</span><br />
+				<span class="comments">// A trip makes us beginning the happiness relationship.</span><br />
 				love(u, i) = <span class="keyword">true</span> && relationship(u, i) = <span class="keyword">true</span><br />
-				<span class="comments">// Sometimes, distance and time brought us to quarrels.</span><br />
-				<span class="comments">// That doesn't matter, we can understand each other.</span><br />
+				<span class="comments">// Always, we are so poor for our interests.</span><br />
+				<span class="comments">// That doesn't matter because we have each otehr.</span><br />
 				happiness(u, i) || quarrels(u, i)  ==> understanding(u, i)<br/>
 				<span class="comments">// Distance and time can not stop lovers.</span><br />
 				<span class="keyword">while</span>(<span class="keyword">forever true</span>){<br />
 				<span class="placeholder"/>	together(u, i)<br />
 				}<br />
-				
-
 			</div>
 			<div id="loveHeart">
 				<canvas id="garden"></canvas>
 				<div id="words">
 					<div id="messages">
-						Linlin, I have fallen in love with you for
+						Yangyang, I have fallen in love with you for
 						<div id="elapseClock"></div>
 					</div>
 					<div id="loveu">
 						Love u forever and ever.<br/>
-						<div class="signature">- biaobiaoqi</div>
+						<div class="signature">- lvzongsheng</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div id="copyright">
 			Inspired by <a href='https://github.com/hackerzhou/Love'>hackerzhou's love project</a>.<br>
-			Copyright © 2013 <a href='http://biaobiaoqi.me'>biaobiaoqi.me</a> 2013-2014
+			Copyright © 2013 <a href=''>lvzongsheng</a> 2013-2014
 		</div>
 	</div>
 	
@@ -97,17 +98,17 @@
 		        onready: initMP3
 	    });
 
+
 		function initMP3() {
 	        MUSIC = soundManager.createSound({
 	            id: 'bgmusic',
-	           	url: 'music/xiaojiuwo.mp3',
+	           	url: 'music/xiaojiuwocut.mp3',
 		        onload: function() {
 		            setTimeout(function() {
 		            	//background music loading completed
 						loading_hint.style.display = "none";
 						start_btn.style.display = "";
-
-		            }, 3000);
+		            }, 300);
 		        }
 	        });
 	        MUSIC.load();
@@ -116,7 +117,16 @@
 
 		var offsetX = $("#loveHeart").width() / 2;
 		var offsetY = $("#loveHeart").height() / 2 - 55;
-
+		
+		var butt = document.getElementById("start_btn");
+		var elem = document.body;
+		if (window.fullScreenApi.supportsFullScreen) {	
+			// handle button click
+			butt.addEventListener('click', function() {
+				//window.fullScreenApi.requestFullScreen(elem);
+			}, true);
+		}
+		
 		document.getElementById("start_btn").onclick = function () {
             //music
             MUSIC.play();
@@ -126,15 +136,16 @@
 			id.style.display =""; 
 
 			//full screen
-			screenfull && screenfull.request();
-
+			//screenfull && screenfull.request();
+			//var elem = document.body;//getElementById("mainDiv"); // Make the body go full screen.
+			
             //hide button
-            document.getElementById("start_btn").remove();
+            document.getElementById("start_btn").style.display = "none";
 
 			//start animation
 
 			var together = new Date();
-			together.setFullYear(2009, 6, 12);
+			together.setFullYear(2007, 9, 1);
 			together.setHours(22);
 			together.setMinutes(0);
 			together.setSeconds(0);
